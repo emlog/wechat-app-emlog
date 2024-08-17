@@ -8,24 +8,25 @@ App({
         this.autoUpdate()
 
         this.globalData = {
-            domain: 'https://demo.emlog.cn',
-            baseUrl: 'https://demo.emlog.cn/?rest-api=', //api
-            api_access_key: "840d2992f3b2301f73e9f096636b31f7", //apikey
-            loading_img: "/images/Loading.gif",
-            empty_img: "/images/cover2.png",
-            empty_avatar: "/images/avatar.png",
-            title: "hello world", //自定义title
-            shareName: 'hello world', //小程序分享名称
-            openComment: false, //是否开启评论 true为开启 false为关闭
-            openSlideView: false, //是否开启首页轮播图 true为开启 false为关闭
-            index_art_style: 'card01', //首页最新文章样式 内置：card01/card02
-            openAd: false, //流量主开通则打开
-            unitId: 'adunit-x', //原生模板广告ID  自定义的时候自己可以选择样式
-            unitId2: 'adunit-x', //视频激励广告--用于文章设置观看视频阅读更多功能
-            author_name: 'snow',
-            author_avatar: '/images/avatar.png',
-            author_bio: 'hello world',
+            domain: 'https://demo.emlog.cn', // 博客站点域名，必须配置好https
+            baseUrl: 'https://demo.emlog.cn/?rest-api=', //api url，开启api后替换为你自己的域名
+            api_access_key: "840d2992f3b2301f73e9f096636b31f7", //api密钥 在emlog后台系统-设置-api 设置界面可以找到
+            loading_img: "/images/Loading.gif", // 加载动画图片
+            empty_img: "/images/cover2.png", // 默认的文章封面图
+            empty_avatar: "/images/avatar.png", // 默认的用户头像
+            title: "hello world", // 小程序标题
+            shareName: 'hello world', // 小程序分享名称
+            author_name: 'snow', // 个人页：作者名称
+            author_avatar: '/images/avatar.png', // 个人页：作者头像
+            author_bio: 'hello world', // 个人页：作者介绍
             about_info: '基于开源博客emlog提供的API开发',
+            // 其他展示不支持的配置
+            openComment: false, // 是否开启评论 true为开启 false为关闭
+            openSlideView: false, // 是否开启首页轮播图 true为开启 false为关闭
+            index_art_style: 'card01', // 首页最新文章样式 内置：card01/card02
+            openAd: false, // 流量主开通则打开
+            unitId: 'adunit-x', // 原生模板广告ID  自定义的时候自己可以选择样式
+            unitId2: 'adunit-x', // 视频激励广告--用于文章设置观看视频阅读更多功能
         }
     },
     autoUpdate: function () {

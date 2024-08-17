@@ -26,16 +26,6 @@
         </swiper>
     </view>
 
-    <view wx:if="{{globalData.openComment}}" class="su-fast-tools">
-        <!-- item 1 -->
-        <view class="su-fast-tools-item" bindtap="toMessageBoardPage">
-            <van-icon size="22px" class="su-fast-tools-item-icon" name="/images/message.png" />
-            <view class="su-fast-tools-item-content">
-                留言反馈
-            </view>
-        </view>
-    </view>
-
     <!-- 骨架屏 -->
     <l-skeleton loading="{{index_skeleton_show}}" paragraph="{{true}}" title="{{true}}" avatar="{{true}}" avatar-size="32rpx" avatar-shape="circle" rows="3" active="{{false}}">
 
