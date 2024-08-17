@@ -17,5 +17,4 @@
         "l-step": "../../lin-ui/dist/step/index"
     },
     "enablePullDownRefresh": true
-
 }

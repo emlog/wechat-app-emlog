@@ -17,7 +17,7 @@ Page({
         articleTopList: [], //文章信息 阅读量最高
         articleList: [], //文章信息  
         page: 0, //当前请求数据是第几页
-        pageSize: 5, //每页数据条数
+        pageSize: 6, //每页数据条数
         hasMoreData: true, //上拉时是否继续请求数据，即是否还有更多数据
         list: app.list, // 自定义tabbar
         capsuleBarHeight: app.capsuleBarHeight,

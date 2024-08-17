@@ -5,7 +5,6 @@
         "pages/mine/mine",
         "pages/article/article",
         "pages/l-article-water/l-article-water",
-        "pages/categories/categories",
         "pages/webview-common/webview-common"
     ],
     "window": {

@@ -11,8 +11,7 @@ App({
             domain: 'https://demo.emlog.cn', // 博客站点域名，必须配置好https
             baseUrl: 'https://demo.emlog.cn/?rest-api=', //api url，开启api后替换为你自己的域名
             api_access_key: "840d2992f3b2301f73e9f096636b31f7", //api密钥 在emlog后台系统-设置-api 设置界面可以找到
-            loading_img: "/images/Loading.gif", // 加载动画图片
-            empty_img: "/images/cover2.png", // 默认的文章封面图
+            empty_img: "/images/cover.png", // 默认的文章封面图
             empty_avatar: "/images/avatar.png", // 默认的用户头像
             title: "hello world", // 小程序标题
             shareName: 'hello world', // 小程序分享名称
