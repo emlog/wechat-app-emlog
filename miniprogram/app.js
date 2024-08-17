@@ -19,7 +19,7 @@ App({
             author_avatar: '/images/avatar.png', // 个人页：作者头像
             author_bio: 'hello world', // 个人页：作者介绍
             about_info: '基于开源博客emlog提供的API开发',
-            // 其他展示不支持的配置
+            // 其他暂时不支持的配置
             openComment: false, // 是否开启评论 true为开启 false为关闭
             openSlideView: false, // 是否开启首页轮播图 true为开启 false为关闭
             index_art_style: 'card01', // 首页最新文章样式 内置：card01/card02
