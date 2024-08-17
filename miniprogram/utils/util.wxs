@@ -1,0 +1,26 @@
+function substringUtil(str, size) {
+    if (str.length == 0 || str == undefined) {
+        return;
+    }
+    if (str.length > size) {
+        return str.substring(0, size - 1) + "...";
+    } else {
+        return str;
+    }
+}
+
+function urlValidateUtil(url) {
+    if (url) {
+        if (url.indexOf('http://') != -1 || url.indexOf('https://') != -1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    return false;
+}
+
+module.exports = {
+    substringUtil: substringUtil,
+    urlValidateUtil: urlValidateUtil,
+}

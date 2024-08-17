@@ -1,0 +1,64 @@
+<!--miniprogram/pages/article/article.wxml-->
+<wxs src="../../utils/dateutils.wxs" module="dateutils" />
+
+<!-- 轻提示 -->
+<van-toast id="van-toast" />
+<!-- bar -->
+<l-capsule-bar bind:linlefttap="onClickLeft" home-page="/pages/index/index" capsule-color="white" bg-color="#ffffff">
+</l-capsule-bar>
+
+<!-- 海报弹出制作结果 -->
+<l-popup locked="{{true}}" show="{{postersShow}}">
+    <painter customActionStyle="{{customActionStyle}}" palette="{{paintPallette}}" bind:imgOK="onImgOK" bind:touchEnd="touchEnd" action="{{action}}" widthPixels="1000" />
+    <!-- 加载提示 -->
+    <view hidden="{{!imgSuccess}}">
+        <van-loading type="spinner" color="#1989fa" size="38px" />
+    </view>
+    <image hidden="{{imgSuccess}}" src="{{image}}" style="width: 654rpx; height: 900rpx; margin-left:40rpx;" />
+    <!-- 关闭 -->
+    <view hidden="{{imgSuccess}}" class="closePosters">
+        <van-button bindtap="closePosters" round size="small" color="#FFCCCC">关闭</van-button>
+        <van-button bindtap="saveImage" round size="small" color="#CCCCFF">保存</van-button>
+    </view>
+</l-popup>
+
+<!-- 文章 头部描述-->
+<l-card wx:if="{{articleDetail.date}}" type="avatar" l-class="card" image="{{articleDetail.author_avatar ? articleDetail.author_avatar : globalData.empty_avatar}}" title="{{articleDetail.author_name}}" describe="{{dateutils.dateTransfer(articleDetail.date)}}">
+    <view class="avter-content">
+        <!-- 标题 -->
+        <view class="article-title">
+            {{articleDetail.title}}
+        </view>
+        <!-- 封面 -->
+        <van-image fit="cover" width="85vw" height="150" src="{{articleDetail.cover ? articleDetail.cover: globalData.empty_img}}" />
+    </view>
+    <view class="avter-share-container">
+        <view class="like-container">
+            <l-icon name="default" color="#666" size="28" />
+            <view class="number">{{articleDetail.views+'阅读'}}</view>
+        </view>
+    </view>
+</l-card>
+
+<!-- 正文 -->
+<view>
+    <view id="content-outer" style="max-height: {{ cuAd === 'showAd'?  maxShowHeight+'px' : 100000+'px'}};" class='content-outer {{cuAd}}'>
+        <van-cell wx:if="{{gzhURL}}" custom-class="origin-address-gzh" is-link title="文章首发地址" icon="/images/gzhicon.png" link-type="navigateTo" value="阅读原文" border="{{true}}" url="/pages/webview-common/webview-common?url={{gzhURL}}&nav={{globalData.title}}" />
+
+        <view id="content-detail">
+            <mp-html lazy-load error-img="{{myStyle.loadingGif}}" loading-img="{{myStyle.loadingGif}}" scroll-table="{{true}}" selectable="{{true}}" bindload="loadover" tag-style="{{myStyle.tagStyle}}" container-style="{{myStyle.containStyle}}" content="{{articleDetail.content}}" />
+        </view>
+        <!-- tags -->
+        <view class="content-base-topic">
+            <view class="tags">
+                标签：<view class="tags-ele" wx:for="{{articleDetail.tags}}"> #{{item.name}} </view>
+            </view>
+        </view>
+    </view>
+    <view class="ad-readmore-mask" wx:if="{{cuAd === 'showAd'}}">
+        <view class="ad-btn" bindtap="readMoreInfo">点击观看视频，阅读更多</view>
+    </view>
+    <view class="ad-style" wx:if="{{ globalData.openAd && globalData.unitId}}">
+        <ad-custom style="width: 97%;" unit-id="{{globalData.unitId}}"></ad-custom>
+    </view>
+</view>

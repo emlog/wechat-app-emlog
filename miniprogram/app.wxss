@@ -1,0 +1,46 @@
+/**app.wxss**/
+/* 隐藏滚动条 */
+::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: #ffffff;
+}
+
+/* 全局顶部栏css  linui组件 */
+.capsule-bar-bg {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+.custom-image-empty .van-empty__image {
+
+    width: 400px;
+    height: 300px;
+
+}
+
+/* vant-wxss */
+
+@import 'components/vant/components/dist/common/index.wxss';
+
+
+page {
+    font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
+        Segoe UI, Arial, Roboto, 'PingFang SC', 'miui', 'Hiragino Sans GB', 'Microsoft Yahei',
+        sans-serif;
+}
+
+/**广告卡片**/
+.ad-style {
+    width: 100%;
+    border-radius: 10px;
+    margin: 10rpx auto !important;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}

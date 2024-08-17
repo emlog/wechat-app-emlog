@@ -1,0 +1,128 @@
+<!--index.wxml-->
+<wxs src="../../utils/dateutils.wxs" module="dateutils" />
+<wxs src="../../utils/util.wxs" module="commonutil" />
+
+<l-capsule-bar hidden-capsule title="{{globalData.title}}" capsule-color="white" bg-color="#ffffff">
+</l-capsule-bar>
+
+<!-- 弹出框 -->
+<van-toast id="van-toast" />
+<van-dialog id="van-dialog" />
+
+<!--  start  -->
+<view class="container-outer">
+    <van-search clearable bind:tap="toAllArticleList" shape="round" background="white" placeholder="请输入搜索关键词" />
+    <!--热门文章轮播图-->
+    <view class="sw-top-article" wx:if="{{globalData.openSlideView}}">
+        <swiper class='swiperTopClass' interval="5000" duration="5000" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots previous-margin="30px" next-margin="30px" circular bindchange="bindchange" style='height: {{swiperHeight}}px'>
+            <block wx:for="{{articleTopList}}" wx:key="index">
+                <swiper-item class="ws-top-article-item" data-article-item="{{item}}" bindtap="toArticleDetail">
+                    <image src="{{commonutil.urlValidateUtil(item.thumbnail) ? item.thumbnail : globalData.domain+item.thumbnail }}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
+                        <text>{{item.title}}</text>
+                        <image class="article-hot-icon" src="../../images/hot.png"></image>
+                    </image>
+                </swiper-item>
+            </block>
+        </swiper>
+    </view>
+
+    <view wx:if="{{globalData.openComment}}" class="su-fast-tools">
+        <!-- item 1 -->
+        <view class="su-fast-tools-item" bindtap="toMessageBoardPage">
+            <van-icon size="22px" class="su-fast-tools-item-icon" name="/images/message.png" />
+            <view class="su-fast-tools-item-content">
+                留言反馈
+            </view>
+        </view>
+    </view>
+
+    <!-- 骨架屏 -->
+    <l-skeleton loading="{{index_skeleton_show}}" paragraph="{{true}}" title="{{true}}" avatar="{{true}}" avatar-size="32rpx" avatar-shape="circle" rows="3" active="{{false}}">
+
+        <!-- 插槽内容 -->
+
+        <!-- 文章列表 样式1 -->
+        <view wx:if="{{globalData.index_art_style==='card01'}}" class="container  su-list">
+            <view class="list-item" wx:for="{{articleList}}" wx:key="index" bindtap="toArticleDetail" data-article-item="{{item}}">
+                <image src="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}" mode="aspectFill"></image>
+                <view class="su-list-title">{{item.title}}</view>
+                <view class="su-list-text">{{item.description}}</view>
+                <view class="su-list-bottom">
+                    <view class="su-list-money">
+                        <l-icon name='eye' size="25" />{{' '+item.views}}
+                    </view>
+                    <view class="su-list-money">{{dateutils.calculateTimeDistance((item.date))}}</view>
+                </view>
+            </view>
+        </view>
+
+        <!-- 文章列表 样式2 -->
+        <div wx:if="{{globalData.index_art_style ==='card02'}}" wx:for="{{articleList}}" wx:for-item="item" wx:key="index">
+            <view class="ad-style" wx:if="{{ globalData.openAd && globalData.unitId && index % 5 == 4 }}">
+                <ad-custom style="width: 97%;" unit-id="{{globalData.unitId}}"></ad-custom>
+            </view>
+
+            <!-- 卡片图片位置在左 -->
+            <l-card wx:if="{{index % 8 == 0 }}" type="primary" l-img-class="img-card" position="left" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
+                <!-- 右上角标签 -->
+                <view wx:if="{{item.top == 'y' }}" class="right-top-tag-container">
+                    <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">
+                        置顶
+                    </l-tag>
+                </view>
+                <!-- 封面右侧全局 -->
+                <view class="right-content">
+                    <view class="avter-content">
+                        {{item.title}}
+                    </view>
+                    <view class="right-content-share">
+                        <view class="like-container">
+                            <l-icon name="time" color="#666" size="28" />
+                            <view class="number">
+                                {{dateutils.calculateTimeDistance((item.date))}}
+                            </view>
+                        </view>
+                        <view class="like-container">
+                            <l-icon name="eye" color="#666" size="28" />
+                            <view class="number">{{item.views}}</view>
+                        </view>
+                    </view>
+                </view>
+            </l-card>
+
+            <!-- 卡片图片位置在右侧 -->
+            <l-card wx:if="{{index % 8 != 0 }}" type="primary" l-img-class="img-card" position="right" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
+                <!-- 右上角标签 -->
+                <view wx:if="{{item.top == 'y'}}" class="left-top-tag-container">
+                    <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">
+                        置顶
+                    </l-tag>
+                </view>
+                <!-- 封面左侧全局 -->
+                <view class="right-content">
+                    <view class="avter-content">
+                        {{item.title}}
+                    </view>
+                    <view class="left-content-share">
+                        <view class="like-container">
+                            <l-icon name="time" color="#666" size="28" />
+                            <view class="number">
+                                {{dateutils.calculateTimeDistance((item.date))}}
+                            </view>
+                        </view>
+                        <view class="like-container">
+                            <l-icon name="eye" color="#666" size="28" />
+                            <view class="number">{{item.views}}</view>
+                        </view>
+                    </view>
+                </view>
+            </l-card>
+        </div>
+
+        <!-- ios底部留白专用 -->
+        <l-loadmore show="{{true}}" type="end" end-text="没有更多内容了哟~" loading-text="加载中~">
+
+        </l-loadmore>
+    </l-skeleton>
+
+</view>

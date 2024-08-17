@@ -1,0 +1,63 @@
+<!--miniprogram/pages/history/history.wxml-->
+<wxs src="../../utils/dateutils.wxs" module="dateutils" />
+<wxs src="../../utils/util.wxs" module="commonutil" />
+
+<l-capsule-bar hidden-capsule title="分类" home-page="/pages/index/index" capsule-color="white" bg-color="#ffffff">
+</l-capsule-bar>
+
+<van-toast id="van-toast" />
+
+<!-- 容器开始 start -->
+<view class="container-outer">
+    <van-search clearable bind:clear="onClear" value="" bind:search="onSearch" shape="round" background="white" placeholder="请输入关键词" />
+    <l-segment bind:linchange="changeTabs" active-key="{{latestTag}}" has-line="{{true}}" l-active-class="tab-active" l-header-class="su-tab-header" scrollable="{{true}}">
+        <l-segment-item has-line key="{{latestTag}}" slot="{{latestTag}}">
+            <view class="tab-item">
+                <view>全部</view>
+            </view>
+        </l-segment-item>
+        <l-segment-item has-line wx:for="{{allCategories}}" wx:key="index" key="{{item.sid}}" slot="{{item.sid}}" data-cell="{{item.sortname}}">
+            <view class="tab-item">
+                <view>{{item.sortname}}</view>
+            </view>
+        </l-segment-item>
+    </l-segment>
+
+    <div wx:for="{{articleList}}" wx:for-item="item" wx:key="index">
+
+        <!-- 卡片图片位置在左 -->
+        <l-card type="primary" l-img-class="img-card" position="left" l-class="card" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ? item.cover : globalData.empty_img }}">
+            <!-- 右上角标签 -->
+            <view wx:if="{{item.top == 'y'}}" class="right-top-tag-container">
+                <l-tag shape="circle" bg-color="#f3f3f3" font-color="#3963BC" size="mini">
+                    置顶
+                </l-tag>
+            </view>
+            <!-- 封面右侧全局 -->
+            <view class="right-content">
+                <view class="avter-content">
+                    {{item.title}}
+                </view>
+                <view class="right-content-share">
+                    <view class="like-container">
+                        <l-icon name="time" color="#666" size="28" />
+                        <view class="number">
+                            {{dateutils.calculateTimeDistance((item.date))}}
+                        </view>
+                    </view>
+                    <view class="like-container">
+                        <l-icon name="eye" color="#666" size="28" />
+                        <view class="number">{{item.views}}</view>
+                    </view>
+                </view>
+            </view>
+        </l-card>
+    </div>
+
+</view>
+<!-- end -->
+
+<!-- ios底部留白专用 -->
+<l-loadmore show="{{true}}" type="end" end-text="没有更多内容了哟~" loading-text="加载中~">
+
+</l-loadmore>
