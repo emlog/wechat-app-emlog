@@ -29,8 +29,6 @@
     <!-- 骨架屏 -->
     <l-skeleton loading="{{index_skeleton_show}}" paragraph="{{true}}" title="{{true}}" avatar="{{true}}" avatar-size="32rpx" avatar-shape="circle" rows="3" active="{{false}}">
 
-        <!-- 插槽内容 -->
-
         <!-- 文章列表 样式1 -->
         <view wx:if="{{globalData.index_art_style==='card01'}}" class="container  su-list">
             <view class="list-item" wx:for="{{articleList}}" wx:key="index" bindtap="toArticleDetail" data-article-item="{{item}}">
@@ -56,9 +54,7 @@
             <l-card wx:if="{{index % 8 == 0 }}" type="primary" l-img-class="img-card" position="left" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
                 <!-- 右上角标签 -->
                 <view wx:if="{{item.top == 'y' }}" class="right-top-tag-container">
-                    <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">
-                        置顶
-                    </l-tag>
+                    <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">置顶</l-tag>
                 </view>
                 <!-- 封面右侧全局 -->
                 <view class="right-content">

@@ -13,8 +13,8 @@ Page({
         authorInfo: {},
         articleList: [], //page list
         allCategories: [], //所有分类
-        page: 0, //当前请求数据是第几页
-        pageSize: 5, //每页数据条数
+        page: 1, //当前请求数据是第几页
+        pageSize: 8, //每页数据条数
         hasMoreData: true, //上拉时是否继续请求数据，即是否还有更多数据
         index_bg_image_url: app.globalData.index_bg_image_url, //首页背景
         currentTab: 'latestTag', //当前标签页 默认为 latestTag
@@ -53,7 +53,6 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-
 
     },
 
@@ -116,8 +115,8 @@ Page({
     // 初始化参数
     initParams() {
         this.setData({
-            page: 0,
-            pageSize: 5,
+            page: 1,
+            pageSize: 8,
             articleList: [],
             currentTab: 'latestTag', //当前标签页 默认为 latestTag
             searchKey: null,
@@ -154,13 +153,12 @@ Page({
     searchArticles(keyword) {
         const that = this;
         const page = that.data.page;
-        const size = that.data.pageSize;
-        const sort = "createTime,desc";
-        wx.showLoading({ //显示 loading 提示框
+        const count = that.data.pageSize;
+        wx.showLoading({
             title: '搜索中',
         })
         wx.request({
-            url: app.globalData.baseUrl + 'article_list&page=' + page + '&count=' + size + '&keyword=' + keyword,
+            url: app.globalData.baseUrl + 'article_list&page=' + page + '&count=' + count + '&keyword=' + keyword,
             method: 'GET',
             success: function (res) {
                 wx.hideLoading()
@@ -237,14 +235,14 @@ Page({
         if (tab.detail.activeKey === this.data.latestTag) {
             this.loadArticleByPage()
         } else {
-            let slug = tab.detail.cell;
+            let slug = tab.detail.activeKey;
             this.setData({
                 currentTab: slug
             })
             this.loadPostsBySlug(slug);
         }
     },
-    // 分类加载
+    // 按分类加载文章
     loadPostsBySlug(slug) {
         const that = this;
         wx.showLoading({ //显示 loading 提示框

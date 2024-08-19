@@ -16,7 +16,7 @@ Page({
         requestResult: '',
         articleTopList: [], //文章信息 阅读量最高
         articleList: [], //文章信息  
-        page: 0, //当前请求数据是第几页
+        page: 1, //当前请求数据是第几页
         pageSize: 6, //每页数据条数
         hasMoreData: true, //上拉时是否继续请求数据，即是否还有更多数据
         list: app.list, // 自定义tabbar
@@ -101,8 +101,8 @@ Page({
     // 初始化参数
     initParams() {
         this.setData({
-            page: 0,
-            pageSize: 20,
+            page: 1,
+            pageSize: 8,
             articleList: [],
         })
     },
@@ -132,8 +132,6 @@ Page({
         })
         const page = that.data.page;
         const count = that.data.pageSize;
-        const sort1 = "topPriority,desc";
-        const sort2 = "createTime,desc";
         wx.request({
             url: app.globalData.baseUrl + 'article_list&page=' + page + '&count=' + count,
             method: 'GET',
