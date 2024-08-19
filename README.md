@@ -18,7 +18,7 @@
 
 - 下载安装部署 [emlog](https://emlog.net)，并开启api（系统-设置-api-开启api）
 - 微信小程序使用api必须是https，因此需要自己的博客网站配置ssl证书。
-- 下载后直接使用【微信开发工具工具】打开即可调试和发布。
+- 下载后直接使用【[微信开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)】打开即可调试和发布。
 - 在 miniprogram 目录app.js配置api密钥以及线上api地址等信息
 
 ## 相关配置说明
