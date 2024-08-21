@@ -1,14 +1,14 @@
 # EMLOG 微信小程序
 
-基于emlog pro系统API开发
+基于 emlog pro 的系统API开发的微信小程序，完全开源，免费下载部署。
 
 ## 主要功能
 
 - 文章列表
 - 文章阅读
-- 文章分类查看
+- 分类查看
 - 文章搜索
-- 个人介绍页
+- 个人介绍
 
 ## 演示
 
@@ -18,8 +18,14 @@
 
 - 下载安装部署 [emlog](https://emlog.net)，并开启api（系统-设置-api-开启api）
 - 微信小程序使用api必须是https，因此需要自己的博客网站配置ssl证书。
-- 下载后直接使用【[微信开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)】打开即可调试和发布。
-- 在 miniprogram 目录app.js配置api密钥以及线上api地址等信息
+- 下载小程序安装包，解压后直接使用【[微信开发工具](https://developers.weixin.qq.com/miniprogram/dev/devtools/download.html)】打开即可调试和发布。
+- 在 miniprogram 目录app.js配置api密钥、api地址、小程序名称、介绍等信息
+
+## 备案和认证
+
+- 需要在微信小程序后台完成备案，不备案无法通过审核。
+- 需要完成付费认证（每年300），认证后的小程序才可以正式发布，被其他用户搜索和使用，否则只能自己体验测试。
+- 提交审核前，推荐小程序设置主营类目：（咨询 - 信息咨询）
 
 ## 相关配置说明
 
