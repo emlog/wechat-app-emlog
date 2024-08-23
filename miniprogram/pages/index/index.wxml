@@ -50,34 +50,8 @@
                 <ad-custom style="width: 97%;" unit-id="{{globalData.unitId}}"></ad-custom>
             </view>
 
-            <!-- 卡片图片位置在左 -->
-            <l-card wx:if="{{index % 8 == 0 }}" type="primary" l-img-class="img-card" position="left" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
-                <!-- 右上角标签 -->
-                <view wx:if="{{item.top == 'y' }}" class="right-top-tag-container">
-                    <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">置顶</l-tag>
-                </view>
-                <!-- 封面右侧全局 -->
-                <view class="right-content">
-                    <view class="avter-content">
-                        {{item.title}}
-                    </view>
-                    <view class="right-content-share">
-                        <view class="like-container">
-                            <l-icon name="time" color="#666" size="28" />
-                            <view class="number">
-                                {{dateutils.calculateTimeDistance((item.date))}}
-                            </view>
-                        </view>
-                        <view class="like-container">
-                            <l-icon name="eye" color="#666" size="28" />
-                            <view class="number">{{item.views}}</view>
-                        </view>
-                    </view>
-                </view>
-            </l-card>
-
             <!-- 卡片图片位置在右侧 -->
-            <l-card wx:if="{{index % 8 != 0 }}" type="primary" l-img-class="img-card" position="right" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
+            <l-card type="primary" l-img-class="img-card" position="right" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
                 <!-- 右上角标签 -->
                 <view wx:if="{{item.top == 'y'}}" class="left-top-tag-container">
                     <l-tag shape="circle" bg-color="#f3f3f3" font-color="#0396FF" size="mini">

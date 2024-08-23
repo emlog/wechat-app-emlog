@@ -38,12 +38,6 @@ Page({
     },
 
     onLoad: function () {
-        // this.loadUserInfo();
-        // if (wx.getUserProfile) {
-        //   this.setData({
-        //     canIUseGetUserProfile: true,
-        //   })
-        // }
         this.initParams()
         // 获取文章列表（最新）
         this.loadLastestArticles();
@@ -107,8 +101,15 @@ Page({
         })
     },
 
+    removeHtmlTags(str) {
+        return str.replace(/<\/?[^>]+(>|$)/g, "");
+    },
+
     // 文章列表追加
     appendArticleList(resList) {
+        resList.forEach(item => {
+            item.description = this.removeHtmlTags(item.description);
+        });
         let allPageArticleList = this.data.articleList;
         if (resList.length < this.data.pageSize || resList.length == 0) {
             this.setData({
@@ -149,26 +150,6 @@ Page({
             fail: function (res) {
                 console.log("请求异常", res)
                 wx.hideLoading()
-            }
-        })
-    },
-
-    //user info 
-    loadUserInfo() {
-        const that = this;
-        wx.request({
-            url: app.globalData.baseUrl + '/content/users/profile?api_access_key=' + app.globalData.api_access_key,
-            method: 'GET',
-            success: function (res) {
-                if (res.data.status == 200) {
-                    app.globalData.authorInfo = res.data.data;
-                    that.setData({
-                        authorInfo: res.data.data,
-                    })
-                }
-            },
-            fail: function (res) {
-                console.log("请求异常", res)
             }
         })
     },
