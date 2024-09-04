@@ -32,12 +32,6 @@
         <!-- 封面 -->
         <van-image fit="cover" width="85vw" height="150" src="{{articleDetail.cover ? articleDetail.cover: globalData.empty_img}}" />
     </view>
-    <view class="avter-share-container">
-        <view class="like-container">
-            <l-icon name="default" color="#666" size="28" />
-            <view class="number">{{articleDetail.views+'阅读'}}</view>
-        </view>
-    </view>
 </l-card>
 
 <!-- 正文 -->
@@ -46,10 +40,11 @@
         <van-cell wx:if="{{gzhURL}}" custom-class="origin-address-gzh" is-link title="文章首发地址" icon="/images/gzhicon.png" link-type="navigateTo" value="阅读原文" border="{{true}}" url="/pages/webview-common/webview-common?url={{gzhURL}}&nav={{globalData.title}}" />
 
         <view id="content-detail">
+            <audioPlayer wx:if="{{articleDetail.fields.mp3}}" bind:onEnd='onEnd' bind:onNext='onNext' src='{{articleDetail.fields.mp3}}' bind:onLast='onLast' title='{{articleDetail.title}}' />
             <mp-html lazy-load error-img="{{myStyle.loadingGif}}" loading-img="{{myStyle.loadingGif}}" scroll-table="{{true}}" selectable="{{true}}" bindload="loadover" tag-style="{{myStyle.tagStyle}}" container-style="{{myStyle.containStyle}}" content="{{articleDetail.content}}" />
         </view>
         <!-- tags -->
-        <view class="content-base-topic">
+        <view class="content-base-topic" wx:if="{{articleDetail.tags.length > 0}}">
             <view class="tags">
                 标签：<view class="tags-ele" wx:for="{{articleDetail.tags}}"> #{{item.name}} </view>
             </view>
