@@ -49,7 +49,6 @@
             <view class="ad-style" wx:if="{{ globalData.openAd && globalData.unitId && index % 5 == 4 }}">
                 <ad-custom style="width: 97%;" unit-id="{{globalData.unitId}}"></ad-custom>
             </view>
-
             <!-- 卡片图片位置在右侧 -->
             <l-card type="primary" l-img-class="img-card" position="right" l-class="card" image-mode="aspectFill" full bindtap="toArticleDetail" data-article-item="{{item}}" image="{{commonutil.urlValidateUtil(item.cover) ?  item.cover : globalData.empty_img }}">
                 <!-- 右上角标签 -->
@@ -60,8 +59,11 @@
                 </view>
                 <!-- 封面左侧全局 -->
                 <view class="right-content">
-                    <view class="avter-content">
-                        {{item.title}}
+                    <view class="avter-content title">
+                        <text>{{item.title}}</text>
+                    </view>
+                    <view class="description" wx:if="{{item.description.length > 0}}">
+                        {{item.description}}
                     </view>
                     <view class="left-content-share">
                         <view class="like-container">

@@ -108,7 +108,15 @@ Page({
     // 文章列表追加
     appendArticleList(resList) {
         resList.forEach(item => {
+            // 移除HTML标签
             item.description = this.removeHtmlTags(item.description);
+
+            // 如果 description 长度大于 50，截取前 50 个字符并加上省略号
+            if (item.description.length > 50) {
+                item.description = item.description.substring(0, 50) + '...';
+            } else {
+                item.description = item.description;
+            }
         });
         let allPageArticleList = this.data.articleList;
         if (resList.length < this.data.pageSize || resList.length == 0) {
