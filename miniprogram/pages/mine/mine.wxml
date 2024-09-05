@@ -4,15 +4,9 @@
 <!-- vant 弹出框 -->
 <van-dialog id="van-dialog" />
 
-<view class="my-info">
+<view class="my-info" style="background-image: url({{backgroundImageUrl}}); opacity: 0.7;">
     <image class="avatar-img" src="{{authorInfo.avatar}}"></image>
     <van-row>{{authorInfo.nickname}}</van-row>
-    <l-button wx:if="{{authorInfo.description}}" special="{{true}}" bindtap="doCopyDomain">
-        <view class="domian-container">
-            <van-icon size="20" name="gem" color="" />
-            <text class="domain-describe">{{authorInfo.description}}</text>
-        </view>
-    </l-button>
 </view>
 <!-- lin-ui message -->
 <l-message />

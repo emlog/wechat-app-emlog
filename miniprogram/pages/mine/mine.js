@@ -10,6 +10,7 @@ Page({
     data: {
         authorInfo: {},
         globalData: app.globalData,
+        backgroundImageUrl: app.globalData.profileBackground,
         loading: false, //全屏加载
     },
 
@@ -31,7 +32,7 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-        this.loadUserInfo()
+        this.loadAuthorInfo(1)
     },
 
     /**
@@ -114,6 +115,31 @@ Page({
             data: app.globalData.domain,
             success: function (res) {
                 console.log("复制内容", app.globalData.domain)
+            }
+        })
+    },
+    loadAuthorInfo(id) {
+        const that = this;
+        wx.showLoading({
+            title: '加载中',
+        })
+        wx.request({
+            url: app.globalData.baseUrl + 'user_detail&id=' + id + '&api_key=' + app.globalData.api_access_key,
+            method: 'GET',
+            success: function (res) {
+                if (res.data.code == 0) {
+                    let data = JSON.parse(JSON.stringify(res.data.data));
+                    that.setData({
+                        authorInfo: data.userinfo,
+                    })
+                    wx.hideLoading()
+                } else {
+                    console.log("用户信息加载异常")
+                }
+            },
+            fail: function (res) {
+                wx.hideLoading()
+                console.log("请求异常", res)
             }
         })
     },

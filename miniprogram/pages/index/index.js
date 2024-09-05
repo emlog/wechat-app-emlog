@@ -164,7 +164,6 @@ Page({
 
     // 文章详情页面
     toArticleDetail(data) {
-        console.log('article data: ', data);
         const articleId = data.currentTarget.dataset.articleItem.id;
         let url = '/pages/article/article?articleId=' + articleId;
         wx.navigateTo({
@@ -182,7 +181,6 @@ Page({
     urlValidateUtil(url) {
         var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
         var objExp = new RegExp(Expression);
-        console.log(objExp.test(url));
         return objExp.test(url);
     },
 

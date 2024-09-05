@@ -15,11 +15,11 @@ App({
             empty_avatar: "/images/avatar.png", // 默认的用户头像
             title: "hello world", // 小程序标题
             shareName: 'hello world', // 小程序分享名称
+            profileBackground: "http://cdn.jsdelivr.net/gh/wangsrGit119/wangsr-image-bucket/img-article/bg-wechat-photo-1544716278-ca5e3f4abd8c.jfif", // 个人页：背景图
             author_name: 'snow', // 个人页：作者名称
             author_avatar: '/images/avatar.png', // 个人页：作者头像
             author_bio: 'hello world', // 个人页：作者介绍
             about_info: '基于开源博客emlog提供的API开发',
-            // 其他暂时不支持的配置
             openComment: false, // 是否开启评论 true为开启 false为关闭
             openSlideView: false, // 是否开启首页轮播图 true为开启 false为关闭
             index_art_style: 'card01', // 首页最新文章样式 内置：card01/card02

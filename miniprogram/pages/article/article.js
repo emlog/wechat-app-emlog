@@ -203,8 +203,6 @@ Page({
                     that.setData({
                         articleDetail: data.article,
                     })
-                    console.log("文章:", data)
-                    //that.metaDataValidate(data)
                 } else {
                     console.log("文章加载异常")
                 }
