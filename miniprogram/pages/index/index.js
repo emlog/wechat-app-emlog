@@ -25,8 +25,6 @@ Page({
         index_skeleton_show: true, //首页骨架屏
         index_skeleton_show_history: true, //历史上的今天骨架
         customeSlugListOne: [], //自定义分类加载列表 -- 第一个
-        historyDayInfo: undefined, //历史上的今天,
-        openHisDialog: false,
     },
     onShow: function () {
         this.setData({
@@ -39,8 +37,8 @@ Page({
 
     onLoad: function () {
         this.initParams()
-        // 获取文章列表（最新）
         this.loadLastestArticles();
+        this.loadTopArticles();
     },
     //增加分享屏幕
     onShareAppMessage: function (res) {
@@ -162,6 +160,29 @@ Page({
         })
     },
 
+    //load  top  article
+    loadTopArticles() {
+        const that = this;
+        const page = 0;
+        const count = 3;
+        wx.request({
+            url: app.globalData.baseUrl + 'article_list&page=' + page + '&count=' + count + '&order=views',
+            method: 'GET',
+            success: function (res) {
+                if (res.data.code == 0) {
+                    that.setData({
+                        articleTopList: res.data.data.articles,
+                    })
+                    console.log("fuck:", articleTopList);
+                }
+            },
+            fail: function (res) {
+                console.log("请求异常", res)
+            }
+        })
+    },
+
+
     // 文章详情页面
     toArticleDetail(data) {
         const articleId = data.currentTarget.dataset.articleItem.id;
@@ -228,11 +249,6 @@ Page({
                     icon: 'none'
                 })
             }
-        })
-    },
-    openHistoryDialog(e) {
-        this.setData({
-            openHisDialog: true
         })
     },
 })

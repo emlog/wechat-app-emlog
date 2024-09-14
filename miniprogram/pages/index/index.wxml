@@ -17,7 +17,7 @@
         <swiper class='swiperTopClass' interval="5000" duration="5000" indicator-color="#a39f99" indicator-active-color="#f49641" indicator-dots previous-margin="30px" next-margin="30px" circular bindchange="bindchange" style='height: {{swiperHeight}}px'>
             <block wx:for="{{articleTopList}}" wx:key="index">
                 <swiper-item class="ws-top-article-item" data-article-item="{{item}}" bindtap="toArticleDetail">
-                    <image src="{{commonutil.urlValidateUtil(item.thumbnail) ? item.thumbnail : globalData.domain+item.thumbnail }}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
+                    <image src="{{commonutil.urlValidateUtil(item.cover) ? item.cover : globalData.empty_img }}" class="slide-image {{swiperIndex == index ? 'active' : 'quiet'}}" mode='aspectFill'>
                         <text>{{item.title}}</text>
                         <image class="article-hot-icon" src="../../images/hot.png"></image>
                     </image>
