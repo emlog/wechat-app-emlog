@@ -47,7 +47,7 @@ Page({
 
         //mp主题
         this.setData({
-            myStyle: new MpCuConfig("default").defaultConfig().myStyle
+            myStyle: new MpCuConfig().defaultConfig().myStyle
         })
         //初始化变量
         that.setData({
