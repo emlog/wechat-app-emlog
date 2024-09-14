@@ -173,7 +173,6 @@ Page({
                     that.setData({
                         articleTopList: res.data.data.articles,
                     })
-                    console.log("fuck:", articleTopList);
                 }
             },
             fail: function (res) {
