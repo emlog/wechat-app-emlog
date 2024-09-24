@@ -83,18 +83,17 @@ Page({
         if (this.data.hasMoreData) {
             this.loadLastestArticles();
         } else {
-            wx.showToast({
-                title: '没有更多数据',
-                image: '../../images/noneData.png',
-                duration: 2000
-            })
+            // wx.showToast({
+            //     title: '没有更多数据',
+            //     image: '../../images/noneData.png',
+            //     duration: 2000
+            // })
         }
     },
     // 初始化参数
     initParams() {
         this.setData({
             page: 1,
-            pageSize: 8,
             articleList: [],
         })
     },
@@ -106,10 +105,7 @@ Page({
     // 文章列表追加
     appendArticleList(resList) {
         resList.forEach(item => {
-            // 移除HTML标签
             item.description = this.removeHtmlTags(item.description);
-
-            // 如果 description 长度大于 50，截取前 50 个字符并加上省略号
             if (item.description.length > 50) {
                 item.description = item.description.substring(0, 50) + '...';
             } else {

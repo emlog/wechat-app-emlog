@@ -1,6 +1,8 @@
 // miniprogram/pages/history/history.js
 import Toast from '../../components/vant/components/dist/toast/toast';
-
+/**
+ * 分类页
+ */
 const app = getApp()
 
 Page({
