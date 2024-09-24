@@ -15,13 +15,12 @@ Page({
         postersShow: false, //海报弹窗
         imgSuccess: true, //海报制作是否成功
         articleDetail: {},
-        //文章信息
         articleId: undefined,
         need_pwd: undefined,
         password: undefined,
         showSkeleton: true, //骨架屏
         passwordDialog: false, //密码输入框
-        inputPwd: "", //用户输入的密码(私密文章)
+        inputPwd: "", //用户输入的密码
         globalData: app.globalData,
         capsuleBarHeight: app.capsuleBarHeight, //顶部高度
         comments: [], //评论

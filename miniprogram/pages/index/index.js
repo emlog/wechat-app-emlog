@@ -9,21 +9,20 @@ Page({
         postersShow: false, //海报弹窗
         imgSuccess: true, //海报制作是否成功
         userInfo: {},
-        authorInfo: {}, //作者信息
+        authorInfo: {},
         hasUserInfo: false,
         logged: false,
         takeSession: false,
         requestResult: '',
-        articleTopList: [], //文章信息 阅读量最高
-        articleList: [], //文章信息  
-        page: 1, //当前请求数据是第几页
-        pageSize: 6, //每页数据条数
+        articleTopList: [],
+        articleList: [],
+        page: 1,
+        pageSize: 6,
         hasMoreData: true, //上拉时是否继续请求数据，即是否还有更多数据
         list: app.list, // 自定义tabbar
         capsuleBarHeight: app.capsuleBarHeight,
         globalData: app.globalData,
         index_skeleton_show: true, //首页骨架屏
-        index_skeleton_show_history: true, //历史上的今天骨架
         customeSlugListOne: [], //自定义分类加载列表 -- 第一个
     },
     onShow: function () {

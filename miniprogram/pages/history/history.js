@@ -13,10 +13,10 @@ Page({
     data: {
         keyword: "",
         authorInfo: {},
-        articleList: [], //page list
+        articleList: [],
         allCategories: [], //所有分类
-        page: 1, //当前请求数据是第几页
-        pageSize: 8, //每页数据条数
+        page: 1,
+        pageSize: 8,
         hasMoreData: true, //上拉时是否继续请求数据，即是否还有更多数据
         index_bg_image_url: app.globalData.index_bg_image_url, //首页背景
         currentTab: 'latestTag', //当前标签页 默认为 latestTag
@@ -124,6 +124,7 @@ Page({
             searchKey: null,
         })
     },
+
     onSearch(key) {
         this.initParams();
         this.setData({
@@ -131,10 +132,12 @@ Page({
         })
         this.searchArticles(key.detail);
     },
+
     onClear() {
         this.initParams()
         this.loadArticleByPage()
     },
+
     // 文章列表追加
     appendArticleList(resList) {
         let allPageArticleList = this.data.articleList;
@@ -151,6 +154,7 @@ Page({
             })
         }
     },
+
     // search article
     searchArticles(keyword) {
         const that = this;
@@ -176,6 +180,7 @@ Page({
             }
         })
     },
+
     loadArticleByPage() {
         const that = this;
         const page = that.data.page;
