@@ -17,7 +17,7 @@ Page({
         articleDetail: {},
         //文章信息
         articleId: undefined,
-        status: undefined,
+        need_pwd: undefined,
         password: undefined,
         showSkeleton: true, //骨架屏
         passwordDialog: false, //密码输入框
@@ -52,6 +52,7 @@ Page({
         //初始化变量
         that.setData({
             articleId: options.articleId,
+            need_pwd: options.need_pwd,
         })
 
         // 骨架屏显示
@@ -60,8 +61,14 @@ Page({
                 showSkeleton: false,
             })
         }, 2000)
-
-        this.initArticle(options.articleId)
+        if (options.need_pwd === 'y') {
+            //展示密码输入框
+            that.setData({
+                passwordDialog: true,
+            })
+        } else {
+            this.initArticle(options.articleId, '')
+        }
 
         // 创建激励视频广告实例
         if (app.globalData.openAd && wx.createRewardedVideoAd) {
@@ -147,7 +154,7 @@ Page({
      */
     onShareAppMessage: function () {
         let articleDetail = this.data.articleDetail;
-        let path = '/pages/article/article?articleId=' + articleDetail.id + '&status=' + articleDetail.status + '&password=' + articleDetail.password;
+        let path = '/pages/article/article?articleId=' + articleDetail.id + '&need_pwd=' + articleDetail.need_pwd;
         return {
             title: articleDetail.title,
             path: path
@@ -156,7 +163,7 @@ Page({
 
     onShareTimeline() {
         let articleDetail = this.data.articleDetail;
-        let path = '/pages/article/article?articleId=' + articleDetail.id + '&status=' + articleDetail.status + '&password=' + articleDetail.password;
+        let path = '/pages/article/article?articleId=' + articleDetail.id + '&need_pwd=' + articleDetail.need_pwd;
         return {
             title: articleDetail.title,
             path: path
@@ -177,9 +184,20 @@ Page({
         }
     },
 
+    // 私密文章密码输入比对
+    onValidatePwd() {
+        this.initArticle(this.data.articleId, this.data.inputPwd)
+    },
+    // 监听密码输入
+    onChangingPwd(e) {
+        this.setData({
+            inputPwd: e.detail.value
+        })
+    },
+
     //初始化文章页面
-    initArticle(articleId) {
-        this.loadArticleDetail(articleId);
+    initArticle(articleId, password) {
+        this.loadArticleDetail(articleId, password);
     },
 
     //返回上一级
@@ -189,21 +207,30 @@ Page({
         })
     },
 
-    loadArticleDetail(articleId) {
+    loadArticleDetail(articleId, password) {
         const that = this;
         wx.showLoading({
             title: '文章加载中',
         })
         wx.request({
-            url: app.globalData.baseUrl + 'article_detail&id=' + articleId,
+            url: app.globalData.baseUrl + 'article_detail&id=' + articleId + '&password=' + password,
             method: 'GET',
             success: function (res) {
                 if (res.data.code == 0) {
                     let data = JSON.parse(JSON.stringify(res.data.data));
                     that.setData({
                         articleDetail: data.article,
-                    })
+                    });
+                    // 确认密码有效后关闭密码弹窗
+                    if (password) {
+                        that.setData({
+                            passwordDialog: false
+                        });
+                    }
                 } else {
+                    if (password) {
+                        that.showMyToast('密码错误', 'fail')
+                    }
                     console.log("文章加载异常")
                 }
             },

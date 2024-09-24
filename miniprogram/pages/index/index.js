@@ -185,7 +185,8 @@ Page({
     // 文章详情页面
     toArticleDetail(data) {
         const articleId = data.currentTarget.dataset.articleItem.id;
-        let url = '/pages/article/article?articleId=' + articleId;
+        const articleNeedPwd = data.currentTarget.dataset.articleItem.need_pwd;
+        let url = '/pages/article/article?articleId=' + articleId + '&need_pwd=' + articleNeedPwd;
         wx.navigateTo({
             url: url,
         })
