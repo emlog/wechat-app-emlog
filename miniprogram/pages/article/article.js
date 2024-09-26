@@ -23,7 +23,7 @@ Page({
         inputPwd: "", //用户输入的密码
         globalData: app.globalData,
         capsuleBarHeight: app.capsuleBarHeight, //顶部高度
-        comments: [], //评论
+        comments: [],
         userInfo: undefined,
         authorInfo: undefined,
         actionSheetShow: false,
@@ -197,6 +197,7 @@ Page({
     //初始化文章页面
     initArticle(articleId, password) {
         this.loadArticleDetail(articleId, password);
+        this.loadComments(articleId)
     },
 
     //返回上一级
@@ -217,6 +218,7 @@ Page({
             success: function (res) {
                 if (res.data.code == 0) {
                     let data = JSON.parse(JSON.stringify(res.data.data));
+                    console.log("article data: ", data.article)
                     that.setData({
                         articleDetail: data.article,
                     });
@@ -336,6 +338,135 @@ Page({
                 unfolding: 'active'
             })
         }
+    },
+
+    loadComments(postId) {
+        const that = this;
+        wx.request({
+            url: app.globalData.baseUrl + 'comment_list&id=' + postId,
+            method: 'GET',
+            success: function (res) {
+                console.log("comment data:", res.data.data.comments)
+                if (res.data.code == 0) {
+                    that.setData({
+                        comments: res.data.data.comments
+                    })
+                }
+            },
+            fail: function (res) {
+                console.log("请求异常", res)
+            }
+        })
+    },
+    
+    // 评论按钮事件
+    toComment(e) {
+        const that = this;
+        this.setData({
+            currentComment: e.detail.commentItem
+        })
+
+        if (app.globalData.userInfo) {
+            that.setData({
+                actionSheetShow: true,
+            })
+        } else {
+            wx.showModal({
+                title: '温馨提示',
+                content: '评论需要使用你的微信昵称',
+                success(res) {
+                    if (res.confirm) {
+                        wx.getUserProfile({
+                            desc: "获取你的昵称、头像、地区及性别",
+                            success: res => {
+                                console.log(res)
+                                app.globalData.userInfo = res.userInfo;
+                                that.setData({
+                                    actionSheetShow: true,
+                                    userInfo: res.userInfo
+                                })
+
+                            },
+                            fail: res => {
+                                //拒绝授权
+                                return;
+                            }
+                        })
+                    } else if (res.cancel) {
+                        //拒绝授权 showErrorModal是自定义的提示
+                        return;
+                    }
+                }
+            })
+        }
+    },
+    // 提交评论
+    saveEvent(e) {
+        const that = this;
+        if (that.data.myComment !== undefined &&
+            that.data.email !== undefined &&
+            that.data.myComment.trim() !== "") {
+            wx.showLoading({
+                title: '评论审核通过后可展示',
+            })
+            that.doComments();
+        } else {
+            this.showMyToast('内容不能为空', 'fail')
+        }
+    },
+    //邮箱失焦验证
+    validateEmail(e) {
+        if (!this.checkEmail(e.detail.value)) {
+            this.setData({
+                email: ""
+            })
+        }
+    },
+    checkEmail(email) {
+        let str = /^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*\.[a-zA-Z0-9]{2,6}$/
+        if (str.test(email)) {
+            return true
+        } else {
+            this.showMyToast('非法邮箱', 'fail')
+            return false
+        }
+    },
+    doComments() {
+        const that = this;
+        let params = {
+            "allowNotification": true,
+            "author": app.globalData.userInfo.nickName,
+            "authorUrl": app.globalData.userInfo.avatarUrl,
+            "content": this.data.myComment,
+            "email": this.data.email,
+            "parentId": this.data.currentComment === undefined ? 0 : this.data.currentComment.id,
+            "postId": this.data.articleId
+        }
+        wx.request({
+            url: app.globalData.baseUrl + '/content/posts/comments?api_access_key=' + app.globalData.api_access_key,
+            data: params,
+            method: 'POST',
+            header: {
+                ContentType: 'application/json'
+            },
+            success: function (res) {
+                wx.hideLoading()
+                if (res.data.status == 200) {
+                    that.loadComments(that.data.articleId)
+                    that.setData({
+                        actionSheetShow: false
+                    });
+                    that.showMyToast('评论成功', 'success');
+                } else {
+                    that.showMyToast('评论失败', 'fail');
+                }
+            },
+            fail: function (res) {
+                that.showMyToast('请求异常', 'fail');
+                console.log("请求异常", res)
+                wx.hideLoading()
+            }
+        })
     },
 
 })

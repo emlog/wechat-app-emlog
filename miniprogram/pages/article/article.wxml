@@ -64,3 +64,37 @@
         <ad-custom style="width: 97%;" unit-id="{{globalData.unitId}}"></ad-custom>
     </view>
 </view>
+
+<!-- 评论区骨架屏 -->
+<view wx:if="{{globalData.openComment}}">
+    <l-skeleton l-class="l-cu-outer-skeleton" style="margin-top:300px;" loading="{{showSkeleton}}" paragraph="{{true}}" title="{{true}}" avatar="{{true}}" avatar-size="32rpx" avatar-shape="circle" rows="13" active="{{true}}">
+        <view class="comments-line">
+            <view class="comments-tag">
+                <l-tag plain="{{true}}" shape="circle" height="60">{{articleDetail.comnum}}评论</l-tag>
+            </view>
+            <view class="comments-right-tag">
+                <l-tag plain="{{true}}" shape="circle" height="60" icon-size="20" icon="comment" bind:lintap="toComment">评论</l-tag>
+            </view>
+        </view>
+        <view wx:if="{{articleDetail.comnum === 0}}">
+            <!-- 空评论 -->
+            <van-empty class="custom-image-empty" description="还没有人评论呢，快来占楼吧^_^" image="{{myStyle.emptyGif}}">
+            </van-empty>
+        </view>
+        <!-- 评论展示区 -->
+        <blog-comment-tag bind:comment="toComment" comments="{{comments}}">
+        </blog-comment-tag>
+        <l-loadmore show="{{true}}" type="loading" loading-text="已经到底了~">
+        </l-loadmore>
+    </l-skeleton>
+</view>
+
+<!-- 弹出框 -->
+<van-action-sheet show="{{ actionSheetShow }}" title="{{userInfo.nickName}}评论" cancel-text="保存" data-userInfo="{{userInfo}}" bind:cancel="saveEvent" bind:close="onClickHide">
+    <view class="block">
+        <van-cell-group>
+            <van-field clearable model:value="{{ email }}" label="邮箱" required bind:blur="validateEmail" border="{{ true }}" />
+            <van-field clearable model:value="{{ myComment }}" label="评论" type="textarea" autosize border="{{ true }}" />
+        </van-cell-group>
+    </view>
+</van-action-sheet>
