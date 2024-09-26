@@ -84,7 +84,7 @@
         <!-- 评论展示区 -->
         <blog-comment-tag bind:comment="toComment" comments="{{comments}}">
         </blog-comment-tag>
-        <l-loadmore show="{{true}}" type="loading" loading-text="已经到底了~">
+        <l-loadmore show="{{true}}" type="end" loading-text="已经到底了~">
         </l-loadmore>
     </l-skeleton>
 </view>

@@ -358,7 +358,7 @@ Page({
             }
         })
     },
-    
+
     // 评论按钮事件
     toComment(e) {
         const that = this;
@@ -434,25 +434,30 @@ Page({
     doComments() {
         const that = this;
         let params = {
-            "allowNotification": true,
-            "author": app.globalData.userInfo.nickName,
-            "authorUrl": app.globalData.userInfo.avatarUrl,
-            "content": this.data.myComment,
-            "email": this.data.email,
-            "parentId": this.data.currentComment === undefined ? 0 : this.data.currentComment.id,
-            "postId": this.data.articleId
+            "comname": app.globalData.userInfo.nickName,
+            "comment": this.data.myComment,
+            "commail": this.data.email,
+            "pid": this.data.currentComment === undefined ? 0 : this.data.currentComment.id,
+            "gid": this.data.articleId,
+            "resp": 'json',
         }
+
+        // 将 params 转换为 form-data 格式
+        let formData = Object.keys(params).map(key => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+        }).join('&');
+
         wx.request({
-            url: app.globalData.baseUrl + '/content/posts/comments?api_access_key=' + app.globalData.api_access_key,
-            data: params,
+            url: app.globalData.domain + '/index.php?action=addcom&api_key=' + app.globalData.api_access_key,
+            data: formData, // 使用转换后的 form-data 格式数据
             method: 'POST',
             header: {
-                ContentType: 'application/json'
+                'Content-Type': 'application/x-www-form-urlencoded' // 设置为 form-data 格式
             },
             success: function (res) {
-                wx.hideLoading()
-                if (res.data.status == 200) {
-                    that.loadComments(that.data.articleId)
+                wx.hideLoading();
+                if (res.data.code == 0) {
+                    that.loadComments(that.data.articleId);
                     that.setData({
                         actionSheetShow: false
                     });
@@ -463,8 +468,8 @@ Page({
             },
             fail: function (res) {
                 that.showMyToast('请求异常', 'fail');
-                console.log("请求异常", res)
-                wx.hideLoading()
+                console.log("请求异常", res);
+                wx.hideLoading();
             }
         })
     },
