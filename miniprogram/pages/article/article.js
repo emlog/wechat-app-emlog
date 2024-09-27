@@ -343,7 +343,7 @@ Page({
     loadComments(postId) {
         const that = this;
         wx.request({
-            url: app.globalData.baseUrl + 'comment_list&id=' + postId,
+            url: app.globalData.baseUrl + 'comment_list_simple&id=' + postId,
             method: 'GET',
             success: function (res) {
                 console.log("comment data:", res.data.data.comments)
@@ -435,13 +435,14 @@ Page({
         const that = this;
         let params = {
             "comname": app.globalData.userInfo.nickName,
+            "avatar": app.globalData.userInfo.avatarUrl,
             "comment": this.data.myComment,
             "commail": this.data.email,
             "pid": this.data.currentComment === undefined ? 0 : this.data.currentComment.id,
             "gid": this.data.articleId,
             "resp": 'json',
         }
-
+        console.log("comment post data: ", params)
         // 将 params 转换为 form-data 格式
         let formData = Object.keys(params).map(key => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);

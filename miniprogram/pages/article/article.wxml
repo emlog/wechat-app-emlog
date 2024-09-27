@@ -90,11 +90,10 @@
 </view>
 
 <!-- 弹出框 -->
-<van-action-sheet show="{{ actionSheetShow }}" title="{{userInfo.nickName}}评论" cancel-text="保存" data-userInfo="{{userInfo}}" bind:cancel="saveEvent" bind:close="onClickHide">
+<van-action-sheet show="{{ actionSheetShow }}" title="发布评论" cancel-text="保存发布" data-userInfo="{{userInfo}}" bind:cancel="saveEvent" bind:close="onClickHide">
     <view class="block">
         <van-cell-group>
-            <van-field clearable model:value="{{ email }}" label="邮箱" required bind:blur="validateEmail" border="{{ true }}" />
-            <van-field clearable model:value="{{ myComment }}" label="评论" type="textarea" autosize border="{{ true }}" />
+            <van-field clearable model:value="{{ myComment }}" placeholder="请输入您的评论..." type="textarea" autosize border="{{ true }}" />
         </van-cell-group>
     </view>
 </van-action-sheet>
