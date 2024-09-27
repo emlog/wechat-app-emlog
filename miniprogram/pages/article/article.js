@@ -438,11 +438,11 @@ Page({
             "avatar": app.globalData.userInfo.avatarUrl,
             "comment": this.data.myComment,
             "commail": this.data.email,
-            "pid": this.data.currentComment === undefined ? 0 : this.data.currentComment.id,
+            "pid": this.data.currentComment === undefined ? 0 : this.data.currentComment.cid,
             "gid": this.data.articleId,
             "resp": 'json',
         }
-        console.log("comment post data: ", params)
+        console.log("comment post data: ", params, "currentComment :", this.data.currentComment)
         // 将 params 转换为 form-data 格式
         let formData = Object.keys(params).map(key => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
