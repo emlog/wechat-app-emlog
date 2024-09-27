@@ -35,7 +35,7 @@
     height: 60rpx;
     width: 60rpx;
     border-radius: 50%;
-    -webkit-animation: ani1 2s linear infinite;
+    animation: ani1 2s linear infinite;
 }
 
 @keyframes ani1 {
@@ -134,7 +134,7 @@
     height: 50rpx;
     width: 50rpx;
     border-radius: 50%;
-    -webkit-animation: ani2 2s linear infinite;
+    animation: ani2 2s linear infinite;
 }
 
 @keyframes ani2 {
