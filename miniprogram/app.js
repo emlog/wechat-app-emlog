@@ -8,24 +8,24 @@ App({
         this.autoUpdate()
 
         this.globalData = {
-            domain: 'https://demo.emlog.cn', // 博客站点域名，必须配置好https
-            baseUrl: 'https://demo.emlog.cn/?rest-api=', //api url，开启api后替换为你自己的域名
-            api_access_key: "840d2992f3b2301f73e9f096636b31f7", //api密钥 在emlog后台系统-设置-api 设置界面可以找到
-            empty_img: "/images/cover.png", // 默认的文章封面图
-            empty_avatar: "/images/avatar.png", // 默认的用户头像
-            title: "hello world", // 小程序标题
-            shareName: 'hello world', // 小程序分享名称
+            domain: 'https://en.emlog.cn', // 博客站点域名，必须配置好https
+            baseUrl: 'https://en.emlog.cn/?rest-api=', //api url，开启api后替换为你自己的域名
+            api_access_key: "4d9b20398ce60b5d067ec995d15ac3dc", //api密钥 在emlog后台系统-设置-api 设置界面可以找到
+            empty_img: "/images/cover.png", // 默认文章封面
+            empty_avatar: "/images/avatar.png", // 默认用户头像
+            title: "cyberView", // 小程序标题
+            shareName: 'cyberView', // 小程序分享名称
             posterBgImg: "/images/posterbg01.jpg", // 分享海报背景图
             qrcodeImg: "/images/qrcodeimg.jpg", // 小程序二维码图 - 用于分享海报
-            profileBackground: "http://cdn.jsdelivr.net/gh/wangsrGit119/wangsr-image-bucket/img-article/bg-wechat-photo-1544716278-ca5e3f4abd8c.jfif", // 个人页：背景图
+            profileBackground: "https://en.emlog.cn/content/uploadfile/202409/ee731725502557.jpg", // 个人页：背景图
             author_name: 'snow', // 个人页：作者名称
             author_avatar: '/images/avatar.png', // 个人页：作者头像
-            author_bio: 'hello world', // 个人页：作者介绍
-            about_info: '基于开源博客emlog提供的API开发',
-            openComment: false, // 是否开启评论 true为开启 false为关闭
-            openSlideView: false, // 是否开启首页轮播图 true为开启 false为关闭
-            index_art_style: 'card01', // 首页最新文章样式 内置：card01/card02
-            openAd: false, // 流量主开通则打开
+            author_bio: 'cyberView', // 个人页：作者介绍
+            about_info: '赛博英语阅读训练',
+            openComment: true, // 是否开启评论 true为开启 false为关闭
+            openSlideView: true, // 是否开启首页轮播图 true为开启 false为关闭
+            index_art_style: 'card02', // 首页最新文章样式 内置：card01/card02
+            openAd: true, // 流量主开通则打开
             unitId: 'adunit-x', // 原生模板广告ID  自定义的时候自己可以选择样式
             unitId2: 'adunit-x', // 视频激励广告--用于文章设置观看视频阅读更多功能
         }
