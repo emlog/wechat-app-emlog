@@ -16,16 +16,13 @@
 }
 
 .custom-image-empty .van-empty__image {
-
     width: 400px;
     height: 300px;
-
 }
 
 /* vant-wxss */
 
 @import 'components/vant/components/dist/common/index.wxss';
-
 
 page {
     font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica,
@@ -42,5 +39,4 @@ page {
     display: flex;
     justify-content: center;
     align-items: center;
-
 }

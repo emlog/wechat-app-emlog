@@ -9,8 +9,8 @@ App({
 
         this.globalData = {
             domain: 'https://en.emlog.cn', // 博客站点域名，必须配置好https
-            baseUrl: 'https://en.emlog.cn/?rest-api=', //api url，开启api后替换为你自己的域名
-            api_access_key: "4d9b20398ce60b5d067ec995d15ac3dc", //api密钥 在emlog后台系统-设置-api 设置界面可以找到
+            baseUrl: 'https://en.emlog.cn/?rest-api=', // API URL，开启API后替换为你自己的域名
+            api_access_key: "474ec2053f79407c891e3f1378ef9961", // API密钥 在emlog后台系统-设置-API 设置界面可以找到
             empty_img: "/images/cover.png", // 默认文章封面
             empty_avatar: "/images/avatar.png", // 默认用户头像
             title: "cyberView", // 小程序标题
@@ -32,7 +32,7 @@ App({
         }
     },
     autoUpdate: function () {
-        // 版本自动更新代码
+        // 版本自动更新
         const updateManager = wx.getUpdateManager()
         updateManager.onCheckForUpdate(function (res) {
             console.log(res.hasUpdate)
@@ -43,17 +43,17 @@ App({
                 content: '检测到新版本，是否重启小程序？',
                 success: function (res) {
                     if (res.confirm) {
-                        // 新的版本已经下载好，调用 applyUpdate 应用新版本并重启
+                        // 新版已经下载好，调用 applyUpdate 应用新版本并重启
                         updateManager.applyUpdate()
                     }
                 }
             })
         })
         updateManager.onUpdateFailed(function () {
-            // 新的版本下载失败
+            // 新版下载失败
             wx.showModal({
                 title: '新版本自动更新失败',
-                content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索“技术源share”打开',
+                content: '请您删除当前小程序，到微信 “发现-小程序” 页，重新搜索该小程序',
                 showCancel: false
             })
         })
