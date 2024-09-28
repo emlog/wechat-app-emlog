@@ -391,16 +391,33 @@ Page({
 
     // 点赞
     onLikeAction(e) {
-        const that = this;
-        const id = e.currentTarget.dataset.id;
+        const articleId = this.data.articleId;
+
+        let params = {
+            "gid": articleId,
+        }
+        // 将 params 转换为 form-data 格式
+        let formData = Object.keys(params).map(key => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
+        }).join('&');
+
         wx.request({
-            url: app.globalData.baseUrl + '/content/posts/' + id + '/likes?api_access_key=' + app.globalData.api_access_key,
+            url: app.globalData.domain + '/index.php?action=addlike&api_key=' + app.globalData.api_access_key,
+            data: formData,
             method: 'POST',
+            header: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
             success: function (res) {
                 console.log(res)
-                if (res.data.status == 200) {
+                if (res.data.code == 0) {
                     wx.showToast({
                         title: '谢谢厚爱',
+                        icon: 'none'
+                    })
+                } else {
+                    wx.showToast({
+                        title: res.data.msg,
                         icon: 'none'
                     })
                 }

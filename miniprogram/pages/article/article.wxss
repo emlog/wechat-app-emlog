@@ -66,6 +66,7 @@ page {
     position: relative;
     background-color: #ffffff;
     padding: 10px;
+    margin-bottom: 20px;
     /* z-index: -1; */
 }
 

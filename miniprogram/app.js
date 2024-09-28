@@ -22,7 +22,8 @@ App({
             author_avatar: '/images/avatar.png', // 个人页：作者头像
             author_bio: 'cyberView', // 个人页：作者介绍
             about_info: '赛博英语阅读训练',
-            openComment: true, // 是否开启评论 true为开启 false为关闭
+            openComment: false, // 是否开启评论 true为开启 false为关闭
+            openLike: true, // 是否开启点赞 true为开启 false为关闭
             openSlideView: true, // 是否开启首页轮播图 true为开启 false为关闭
             index_art_style: 'card02', // 首页最新文章样式 内置：card01/card02
             openAd: true, // 流量主开通则打开
