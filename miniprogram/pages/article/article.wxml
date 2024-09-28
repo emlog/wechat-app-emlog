@@ -69,11 +69,16 @@
 <view wx:if="{{globalData.openComment}}">
     <l-skeleton l-class="l-cu-outer-skeleton" style="margin-top:300px;" loading="{{showSkeleton}}" paragraph="{{true}}" title="{{true}}" avatar="{{true}}" avatar-size="32rpx" avatar-shape="circle" rows="13" active="{{true}}">
         <view class="comments-line">
-            <view class="comments-tag">
-                <l-tag plain="{{true}}" shape="circle" height="60">{{articleDetail.comnum}}评论</l-tag>
-            </view>
-            <view class="comments-right-tag">
-                <l-tag plain="{{true}}" shape="circle" height="60" icon-size="20" icon="comment" bind:lintap="toComment">评论</l-tag>
+            <view class="comments-left-tag-container">
+                <view class="comments-left-tag">
+                    <l-tag plain="{{true}}" shape="circle" height="60" icon-size="20" icon="comment" bind:lintap="toComment"></l-tag>
+                </view>
+                <view class="comments-left-tag">
+                    <l-tag plain="{{true}}" shape="circle" height="60" icon-size="20" icon="like" bindtap="onLikeAction"></l-tag>
+                </view>
+                <view class="comments-left-tag">
+                    <l-tag plain="{{true}}" shape="circle" height="60" icon-size="20" icon="share" bindtap="getUserProfile"></l-tag>
+                </view>
             </view>
         </view>
         <view wx:if="{{articleDetail.comnum === 0}}">

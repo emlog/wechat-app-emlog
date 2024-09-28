@@ -281,6 +281,31 @@ Page({
             }
         })
     },
+
+    removeHtmlTags(str) {
+        return str.replace(/<\/?[^>]+(>|$)/g, "");
+    },
+
+    markPosters() {
+        let tempArticle = this.data.articleDetail;
+        this.setData({
+            paintPallette: new Card(
+                app.globalData.posterBgImg,
+                app.globalData.qrcodeImg,
+                tempArticle.cover,
+                tempArticle.title,
+                this.removeHtmlTags(tempArticle.excerpt),
+                app.globalData.userInfo.nickName).palette(),
+            postersShow: true
+        });
+    },
+
+    closePosters() {
+        this.setData({
+            postersShow: false
+        })
+    },
+
     onImgOK(e) {
         this.setData({
             imgSuccess: false
@@ -299,6 +324,30 @@ Page({
             wx.saveImageToPhotosAlbum({
                 filePath: this.imagePath,
             });
+        }
+    },
+
+    //  获取用户信息并制作海报
+    getUserProfile() {
+        if (app.globalData.userInfo && app.globalData != undefined) {
+            this.markPosters();
+        } else {
+            wx.getUserProfile({
+                desc: '展示用户信息', // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+                success: (res) => {
+                    app.globalData.userInfo = res.userInfo;
+                    this.setData({
+                        avatarUrl: res.userInfo.avatarUrl,
+                        userInfo: res.userInfo,
+                        hasUserInfo: true,
+                    })
+                    this.markPosters();
+                },
+                fail: (err) => {
+                    console.log(err)
+                }
+            })
+
         }
     },
 
@@ -338,6 +387,31 @@ Page({
                 unfolding: 'active'
             })
         }
+    },
+
+    // 点赞
+    onLikeAction(e) {
+        const that = this;
+        const id = e.currentTarget.dataset.id;
+        wx.request({
+            url: app.globalData.baseUrl + '/content/posts/' + id + '/likes?api_access_key=' + app.globalData.api_access_key,
+            method: 'POST',
+            success: function (res) {
+                console.log(res)
+                if (res.data.status == 200) {
+                    wx.showToast({
+                        title: '谢谢厚爱',
+                        icon: 'none'
+                    })
+                }
+            },
+            fail: function (err) {
+                wx.showToast({
+                    title: '点赞失败',
+                    icon: 'none'
+                })
+            }
+        })
     },
 
     loadComments(postId) {
@@ -414,7 +488,6 @@ Page({
             this.showMyToast('内容不能为空', 'fail')
         }
     },
-    //邮箱失焦验证
     validateEmail(e) {
         if (!this.checkEmail(e.detail.value)) {
             this.setData({
@@ -450,10 +523,10 @@ Page({
 
         wx.request({
             url: app.globalData.domain + '/index.php?action=addcom&api_key=' + app.globalData.api_access_key,
-            data: formData, // 使用转换后的 form-data 格式数据
+            data: formData,
             method: 'POST',
             header: {
-                'Content-Type': 'application/x-www-form-urlencoded' // 设置为 form-data 格式
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             success: function (res) {
                 wx.hideLoading();

@@ -15,6 +15,8 @@ App({
             empty_avatar: "/images/avatar.png", // 默认的用户头像
             title: "hello world", // 小程序标题
             shareName: 'hello world', // 小程序分享名称
+            posterBgImg: "/images/posterbg01.jpg", // 分享海报背景图
+            qrcodeImg: "/images/qrcodeimg.jpg", // 小程序二维码图 - 用于分享海报
             profileBackground: "http://cdn.jsdelivr.net/gh/wangsrGit119/wangsr-image-bucket/img-article/bg-wechat-photo-1544716278-ca5e3f4abd8c.jfif", // 个人页：背景图
             author_name: 'snow', // 个人页：作者名称
             author_avatar: '/images/avatar.png', // 个人页：作者头像

@@ -1,8 +1,9 @@
 // 海报
 export default class LastMayday {
 
-    constructor(bgUrl, articleCover, title, summary, nickname) {
+    constructor(bgUrl, qrcodeUrl, articleCover, title, summary, nickname) {
         this.bgUrl = bgUrl
+        this.qrcodeUrl = qrcodeUrl
         this.title = title
         this.summary = summary
         this.articleCover = articleCover
@@ -18,7 +19,7 @@ export default class LastMayday {
                 // 背景
                 {
                     "type": "image",
-                    "url": this.bgUrl, //"/images/bg-image001.jpeg",  
+                    "url": this.bgUrl,
                     "css": {
                         "width": "720px",
                         "height": "1280px",
@@ -88,7 +89,7 @@ export default class LastMayday {
                 // 二维码
                 {
                     "type": "image",
-                    "url": "/images/wechat-q-code.jpg",
+                    "url": this.qrcodeUrl,
                     "css": {
                         "width": "130px",
                         "height": "140px",

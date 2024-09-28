@@ -1,0 +1,37 @@
+# WeChat Mini Program Specific
+project.config.json
+project.private.config.json
+miniprogram_npm/
+miniprogram_dev/
+miniprogram_dist/
+
+# Node modules
+node_modules/
+
+# Log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# VS Code specific
+.vscode/
+*.code-workspace
+
+# macOS-specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# VS Code Extensions
+*.code-workspace
+
+# WeChat Developer Tool related files
+*.swp
+*.swo
+
+# Output of wechat devtool
+coverage/
+dist/
