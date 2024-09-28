@@ -1,5 +1,4 @@
 # WeChat Mini Program Specific
-project.config.json
 project.private.config.json
 miniprogram_npm/
 miniprogram_dev/
